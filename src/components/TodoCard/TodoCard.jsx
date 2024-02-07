@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { axios } from '@Axios';
+import './TodoCard.css';
 
 export default function TodoCard({ todo, updatedTodoObj, deletedTodoId }) {
     const [updatedTodo, setUpdatedTodo] = useState("");
@@ -34,12 +35,14 @@ export default function TodoCard({ todo, updatedTodoObj, deletedTodoId }) {
 
     return (
         <div className='todo-container' >
-            <div className="todo-name">
-                {todo.todo}
-            </div>
-            <div className="todo-buttons">
-                <button className='update' onClick={handleUpdate}>Update</button>
-                <button className='delete' onClick={() => handleDelete(todo.id)}>Delete</button>
+            <div className="todo-card">
+                <div className="todo-name">
+                    {todo.todo}
+                </div>
+                <div className="todo-buttons">
+                    <button className='update btn1' onClick={handleUpdate} >Update</button>
+                    <button className='delete btn2' onClick={() => handleDelete(todo.id)}>Delete</button>
+                </div>
             </div>
             {hasUpdation ? <div className="updation-form">
                 <input type="text" value={updatedTodo} onChange={handleChange} />

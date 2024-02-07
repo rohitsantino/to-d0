@@ -1,0 +1,30 @@
+.todo-container {
+    margin-top: 9px
+}
+
+.todo-card {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 10px;
+}
+
+.btn1 {
+    font-size: 9px;
+    position: absolute;
+    right: 54px;
+}
+
+.btn2 {
+    font-size: 9px;
+    position: absolute;
+    right: -16px;
+}
+
+.updation-form {
+    margin-top: 14px;
+
+    button {
+        font-size: 12px;
+    }
+}

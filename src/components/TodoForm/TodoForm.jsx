@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { axios } from "@Axios";
+import './TodoForm.css';
 
 export default function TodoForm() {
   const [todo, setTodo] = useState("");
@@ -12,7 +13,7 @@ export default function TodoForm() {
     }).then(() => window.location.reload());
     setTodo("");
   }
-  
+
   return (
     <div className="todo-container">
       <form onSubmit={handleSubmit}>
@@ -25,7 +26,7 @@ export default function TodoForm() {
           value={todo}
           onChange={(e) => setTodo(e.target.value)}
         />
-        <button type="submit">Add Todo</button>
+        <button type="submit" className="btn">Add Todo</button>
       </form>
     </div>
 
