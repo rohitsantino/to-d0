@@ -3,10 +3,13 @@ import { axios } from '@Axios';
 
 export default function TodoCard({ todo, updatedTodoObj, deletedTodoId }) {
     const [updatedTodo, setUpdatedTodo] = useState("");
+    const [hasUpdation, setHasUpdation] = useState(false);
     const handleDelete = (todoID) => {
         deletedTodoId(todoID);
         axios.delete(`/api/v1/to-do/${todoID}`);
     }
+
+    const handleUpdate = () => setHasUpdation((prevUpdatedBool) => !prevUpdatedBool);
     useEffect(() => {
         setUpdatedTodo(todo.todo);
     }, [])
@@ -15,11 +18,16 @@ export default function TodoCard({ todo, updatedTodoObj, deletedTodoId }) {
         setUpdatedTodo(e.target.value);
     }
 
-    const handleUpdation = (todo) => {
-        updatedTodoObj(todo);
+    const handleUpdation = () => {
+        const updatedTodoTask = {
+            id: todo.id,
+            todo: updatedTodo
+        };
+        updatedTodoObj(updatedTodoTask);
         axios.put(`/api/v1/to-do/${todo.id}`, {
             todo: updatedTodo
-        })
+        });
+        setHasUpdation(false);
     }
     return (
         <div className='todo-container' >
@@ -27,13 +35,13 @@ export default function TodoCard({ todo, updatedTodoObj, deletedTodoId }) {
                 {todo.todo}
             </div>
             <div className="todo-buttons">
-                <button className='update'>Update</button>
+                <button className='update' onClick={handleUpdate}>Update</button>
                 <button className='delete' onClick={() => handleDelete(todo.id)}>Delete</button>
             </div>
-            <div className="updation-form">
+            {hasUpdation ? <div className="updation-form">
                 <input type="text" value={updatedTodo} onChange={handleChange} />
-                <button onClick={() => handleUpdation(todo)}>Submit</button>
-            </div>
+                <button onClick={handleUpdation}>Submit</button>
+            </div> : null}
         </div>
     )
 }
