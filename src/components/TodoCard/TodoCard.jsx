@@ -4,12 +4,14 @@ import { axios } from '@Axios';
 export default function TodoCard({ todo, updatedTodoObj, deletedTodoId }) {
     const [updatedTodo, setUpdatedTodo] = useState("");
     const [hasUpdation, setHasUpdation] = useState(false);
+
     const handleDelete = (todoID) => {
         deletedTodoId(todoID);
         axios.delete(`/api/v1/to-do/${todoID}`);
     }
 
     const handleUpdate = () => setHasUpdation((prevUpdatedBool) => !prevUpdatedBool);
+
     useEffect(() => {
         setUpdatedTodo(todo.todo);
     }, [])
@@ -29,6 +31,7 @@ export default function TodoCard({ todo, updatedTodoObj, deletedTodoId }) {
         });
         setHasUpdation(false);
     }
+
     return (
         <div className='todo-container' >
             <div className="todo-name">

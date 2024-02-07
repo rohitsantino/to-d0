@@ -2,14 +2,17 @@ import React, { useState } from 'react'
 import { axios } from "@Axios";
 
 export default function TodoForm() {
-  const [todo, setTodo] = useState([]);
+  const [todo, setTodo] = useState("");
+
   const handleSubmit = (e) => {
+    if(!todo.trim())return;
     e.preventDefault();
     axios.post(`/api/v1/to-do`, {
       todo: todo
     }).then(() => window.location.reload());
     setTodo("");
   }
+  
   return (
     <div className="todo-container">
       <form onSubmit={handleSubmit}>
