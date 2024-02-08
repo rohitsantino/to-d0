@@ -6,7 +6,7 @@ export default function Todos() {
     const [todos, setTodos] = useState([]);
     const loadTodos = async () => {
         try {
-           await axios.get(`/api/v1/to-do`).then(res => setTodos(res.data));
+            await axios.get(`/api/v1/to-do`).then(res => setTodos(res.data));
         } catch (error) {
             console.log(error);
         }
@@ -23,11 +23,13 @@ export default function Todos() {
             return todo;
         });
         setTodos([...updatedTodos]);
-    };
+    }
+
     const handleDeletion = (todoID) => {
         const filteredTodos = todos.filter(todo => todo.id != todoID);
         setTodos([...filteredTodos]);
-    };
+    }
+
     return (
         <div className='todos-container'>
             {todos.map(todo => (
